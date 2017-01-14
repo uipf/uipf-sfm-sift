@@ -43,3 +43,17 @@ include_directories(${ModuleBase_INCLUDE_DIRS})
 add_library(LoeweSiftModule SHARED LoeweSiftModule.cpp)
 target_link_libraries(LoeweSiftModule ${ModuleBase})
 add_dependencies(LoeweSiftModule SIFT)
+
+# installation targets
+install(TARGETS
+	LoeweSiftModule
+
+	LIBRARY DESTINATION lib/uipf
+	ARCHIVE DESTINATION lib/uipf
+)
+
+# install headers
+install(DIRECTORY ${uipf-sfm-sift_SOURCE_DIR}/include
+	DESTINATION include/uipf-sfm/sift
+	FILES_MATCHING PATTERN "*.hpp"
+)
