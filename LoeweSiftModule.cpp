@@ -3,6 +3,7 @@
 #include <iostream>
 #include <uipf/logging.hpp>
 #include <uipf/data/opencv.hpp>
+#include <uipf/util.hpp>
 
 #include <uipf-sfm/data/KeyPointList.hpp>
 #include <uipf-sfm/data/Image.hpp>
@@ -35,8 +36,6 @@ using namespace uipf;
 using namespace uipf::data;
 using namespace uipfsfm::data;
 
-#include "exec.cpp"
-
 void LoeweSiftModule::run() {
 
 	using namespace std;
@@ -45,9 +44,12 @@ void LoeweSiftModule::run() {
 
 	const string& imagePath = image->getContent();
 	// TODO convert image to PGM format if it is not already
+	// using image magic
+	// /usr/bin/mogrify -format pgm ./CIMG6446.jpg; ../bin/sift < ./CIMG6446.pgm > ./CIMG6446.key; gzip -f ./CIMG6446.key; rm ./CIMG6446.pgm
 
+	// TODO alternative input via opencv and use opencv for conversion
 
-	std::string sift = uipf::sfm::exec((string(SIFT_BINARY) + string(" < ") + imagePath).c_str());
+	std::string sift = uipf::util::exec((string(SIFT_BINARY) + string(" < ") + imagePath).c_str());
 	istringstream s(sift);
 
 	int point_count = 0;
@@ -68,7 +70,7 @@ void LoeweSiftModule::run() {
 		for(int v = 0; v < vector_length; ++v) {
 			s >> kp->descriptor[v];
 		}
-		kp->print();
+		// kp->print();
 	}
 
 	UIPF_LOG_INFO("Number of detected interest points:", image->getContent(), ": ", point_count);
