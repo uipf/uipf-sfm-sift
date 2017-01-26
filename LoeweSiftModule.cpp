@@ -129,6 +129,7 @@ void LoeweSiftModule::run() {
 		}
 		image->keypoints->descriptors.push_back(descriptor);
 	}
+	image->hasKeyPoints = true;
 	//image->keypoints->print(false);
 
 	UIPF_LOG_INFO("Number of detected interest points:", image->getContent(), ": ", point_count);
