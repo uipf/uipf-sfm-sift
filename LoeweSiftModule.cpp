@@ -60,7 +60,6 @@ void LoeweSiftModule::run() {
 	fs::path ip(imagePath);
 	string keyFileName = (ip.parent_path() / ip.stem()).string() + ".key";
 	stringstream s;
-	UIPF_LOG_DEBUG("using cached key file: ", keyFileName);
 	UIPF_LOG_DEBUG("using cache: ", cache);
 	if (cache && fs::exists(fs::path(keyFileName))) {
 		UIPF_LOG_DEBUG("using cached key file: ", keyFileName);
