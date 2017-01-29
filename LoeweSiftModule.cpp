@@ -35,7 +35,9 @@
 
 
 // TODO configure this path with cmake
+#ifndef SIFT_BINARY
 #define SIFT_BINARY "uipf-sfm-sift"
+#endif
 
 using namespace uipf;
 using namespace uipf::data;
