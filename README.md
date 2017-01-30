@@ -25,4 +25,7 @@ See the following ressources for enabling multiarch support:
 TODO
 ----
 
-Reimplement this based on <https://robwhess.github.io/opensift/>.
+Reimplement this based on one of the following:
+
+- <https://robwhess.github.io/opensift/>.
+- <http://vision.ucla.edu/~vedaldi/code/siftpp.html>.
