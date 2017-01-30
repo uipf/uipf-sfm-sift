@@ -43,7 +43,7 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include)
 add_library(SfMLoeweSiftModule SHARED LoeweSiftModule.cpp)
 target_link_libraries(SfMLoeweSiftModule ${ModuleBase})
 add_dependencies(SfMLoeweSiftModule SIFT)
-set_target_properties(SfMLoeweSiftModule PROPERTIES COMPILE_FLAGS "-DSIFT_BINARY=${CMAKE_INSTALL_PREFIX}/bin/uipf-sfm-sift")
+set_target_properties(SfMLoeweSiftModule PROPERTIES COMPILE_FLAGS '-DSIFT_BINARY="${CMAKE_INSTALL_PREFIX}/bin/uipf-sfm-sift"')
 
 # installation targets
 install(TARGETS
