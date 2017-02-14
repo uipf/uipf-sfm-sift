@@ -41,7 +41,6 @@
 
 using namespace uipf;
 using namespace uipf::data;
-using namespace uipf::util;
 using namespace uipfsfm::data;
 
 void LoeweSiftModule::run() {
@@ -73,7 +72,7 @@ void LoeweSiftModule::run() {
 		string tmpFile = imagePath;
 		bool deleteTmpFile = false;
 		// convert image to PGM format if it is not already
-		if (!str_ends_with(str_to_lower(imagePath), ".pgm")) {
+		if (!uipf_str_ends_with(uipf_str_to_lower(imagePath), ".pgm")) {
 			tmpFile = imagePath + string(".pgm");
 			deleteTmpFile = true;
 			UIPF_LOG_DEBUG("creating temporary .pgm file for image ", tmpFile);
@@ -84,14 +83,14 @@ void LoeweSiftModule::run() {
 			// /usr/bin/mogrify -format pgm ./CIMG6446.jpg; ../bin/sift < ./CIMG6446.pgm > ./CIMG6446.key; gzip -f ./CIMG6446.key; rm ./CIMG6446.pgm
 		}
 
-		std::string sift = uipf::util::exec((string(SIFT_BINARY) + string(" < ") + tmpFile).c_str());
+		std::string sift = uipf_exec_stdout((string(SIFT_BINARY) + string(" < ") + tmpFile).c_str());
 
 		if (createKeyFile) {
 			ofstream keyFile(keyFileName);
 			keyFile << sift;
 			keyFile.close();
 			if (gzipOutput) {
-				exec(string(string("gzip ") + keyFileName).c_str()); // TODO proper shell arg escaping
+				uipf_exec_stdout(string(string("gzip ") + keyFileName).c_str()); // TODO proper shell arg escaping
 			}
 		}
 		s << sift;
