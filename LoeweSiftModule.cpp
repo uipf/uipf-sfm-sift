@@ -101,38 +101,11 @@ void LoeweSiftModule::run() {
 		}
 	}
 
-	// std::stof() is locale aware, meaning params are not portable between platforms
-	// the following is a locale independend stof():
-	s.imbue(std::locale("C"));
-
-	int point_count = 0;
-	s >> point_count;
-	int vector_length = 0;
-	s >> vector_length;
-
-	image->keypoints = KeyPointList::ptr(new KeyPointList());
-	for(int i = point_count; i > 0; --i) {
-		float row, col, scale, rot;
-		s >> col;
-		s >> row;
-		s >> scale;
-		s >> rot;
-		// convert value from range [-PI,PI[ (sift) to [0,360[ (openCV)
-		rot = (int)(rot * 180/M_PI) + 180;
-
-		image->keypoints->getContent().push_back(cv::KeyPoint(row, col, scale, rot));
-		cv::Mat* descriptor = new cv::Mat(1, vector_length - 1, CV_8U);
-		for(int v = 0; v < vector_length; ++v) {
-			int no;
-			s >> no;
-			descriptor->at<uint8_t>(v) = (uint8_t) no;
-		}
-		image->keypoints->descriptors.push_back(descriptor);
-	}
+	image->keypoints = KeyPointList::ptr(new KeyPointList(s));
 	image->hasKeyPoints = true;
 	//image->keypoints->print(false);
 
-	UIPF_LOG_INFO("Number of detected interest points:", image->getContent(), ": ", point_count);
+	UIPF_LOG_INFO("Number of detected interest points:", image->getContent(), ": ", image->keypoints->getContent().size());
 
 //	sfmImage->keypoints = points;
 	setOutputData<Image>("image", image);
