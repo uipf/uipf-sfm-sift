@@ -38,10 +38,14 @@ find_library(
 )
 message("ModuleBase: ${ModuleBase}")
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
-
+find_library(
+	uipf-sfm uipf-sfm
+	PATHS ${CMAKE_INSTALL_PREFIX}/lib
+)
+message("uipf-sfm: ${uipf-sfm}")
 
 add_library(SfMLoeweSiftModule SHARED LoeweSiftModule.cpp)
-target_link_libraries(SfMLoeweSiftModule ${ModuleBase})
+target_link_libraries(SfMLoeweSiftModule ${ModuleBase} ${uipf-sfm})
 add_dependencies(SfMLoeweSiftModule SIFT)
 set_target_properties(SfMLoeweSiftModule PROPERTIES COMPILE_FLAGS '-DSIFT_BINARY="${CMAKE_INSTALL_PREFIX}/bin/uipf-sfm-sift"')
 
