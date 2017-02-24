@@ -4,9 +4,9 @@ Priority: optional
 Maintainer: Carsten Brandt <mail@cebe.cc>
 Build-Depends: debhelper (>= 9), cmake, libuipf-dev, libuipf-sfm-dev
 Standards-Version: 3.9.5
-Homepage: https://gitlab.cebe.cc/master/uipf-sfm
-Vcs-Git: https://gitlab.cebe.cc:master/uipf-sfm.git
-Vcs-Browser: https://gitlab.cebe.cc/master/uipf-sfm
+Homepage: https://gitlab.cebe.cc/master/uipf-sfm-sift
+Vcs-Git: https://gitlab.cebe.cc:master/uipf-sfm-sift.git
+Vcs-Browser: https://gitlab.cebe.cc/master/uipf-sfm-sift
 
 # main library
 Package: libuipf-sfm-sift
