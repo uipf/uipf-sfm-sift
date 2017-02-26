@@ -62,8 +62,11 @@ install(TARGETS
 #	DESTINATION include/uipf-sfm/sift
 #	FILES_MATCHING PATTERN "*.hpp"
 #)
+option(INSTALL_SIFT "Whether to install the sift binary, which is 32bit only. This should be disabled on a 64bit system." ON)
+if (INSTALL_SIFT)
 install(FILES ${uipf-sfm-sift_BINARY_DIR}/sift/sift
 	DESTINATION bin/
 	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 	RENAME uipf-sfm-sift
 )
+endif()
