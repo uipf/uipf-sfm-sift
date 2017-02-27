@@ -83,7 +83,7 @@ void LoeweSiftModule::run() {
 			// /usr/bin/mogrify -format pgm ./CIMG6446.jpg; ../bin/sift < ./CIMG6446.pgm > ./CIMG6446.key; gzip -f ./CIMG6446.key; rm ./CIMG6446.pgm
 		}
 
-		std::string sift = uipf_exec_stdout((string(SIFT_BINARY) + string(" < ") + tmpFile).c_str());
+		std::string sift = uipf_exec_stdout((string(SIFT_BINARY) + string(" < \"") + tmpFile + string("\"")).c_str());
 
 		if (createKeyFile) {
 			ofstream keyFile(keyFileName);
